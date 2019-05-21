@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <img src="{{ photo.url() }}" alt="">
+{% extends 'base.html' %}
 
-    <form action="{{ photo.like_url() }}" method="post">
-        <input type="submit" value="{{ photo.likes|length or 0 }}">
-    </form>
+{% block title %}
+    Photos
+{% endblock %}
 
-    <ul>
-        {% for comment in photo.comments %}
-            <li>{{ comment.user.email }}: {{ comment.content }}</li>
-        {% endfor %}
-    </ul>
+{% block content %}
+    <div class="container">
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="card col-md-12 p-3">
+                <div class="row ">
+                    <img class="card-img-top" src="{{ photo.url() }}">
+                </div>
 
-    <form action="{{ photo.comment_url() }}" method="post">
-        <input type="text" name="content">
-        <input type="submit">
-    </form>
-</body>
-</html>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card-block">
+                            <ul>
+                                {% for comment in photo.comments %}
+                                    <li>{{ comment.user.email }}: {{ comment.content }}</li>
+                                {% endfor %}
+                            </ul>
+
+                            <form action="{{ photo.comment_url() }}" method="post">
+                                <input type="text" name="content">
+                                <input type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

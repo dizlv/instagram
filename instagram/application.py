@@ -1,8 +1,10 @@
 import flask
 
+
 from instagram import views
 from instagram.db import db
 from instagram.auth import login_manager
+from instagram.static import bootstrap
 
 
 def create_application(configuration):
@@ -11,6 +13,8 @@ def create_application(configuration):
     application.config.from_object(configuration)
 
     db.init_app(application)
+
+    bootstrap.init_app(application)
 
     try:
         db.create_all(app=application)
