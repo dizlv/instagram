@@ -1,0 +1,1 @@
+APPLICATION_CONFIG_FILE=instagram.configuration.LocalConfig gunicorn instagram:application --bind=0.0.0.0
